@@ -1,0 +1,34 @@
+# robots.txt for affordableinsurancequotes.net
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.affordableinsurancequotes.net/sitemap.xml
+
+# Crawl delay for politeness (optional)
+Crawl-delay: 1
+
+# Disallow specific paths if needed
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all major search engine bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
