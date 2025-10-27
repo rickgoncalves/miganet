@@ -229,8 +229,8 @@ ul {
 
 .btn-primary-nav {
     background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-    color: white;
-    padding: 12px 28px;
+    color: white !important;
+    padding: 12px 28px !important;
     border-radius: var(--radius-lg);
     font-weight: 700;
     font-size: 15px;
