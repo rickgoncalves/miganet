@@ -6,7 +6,7 @@ A complete, SEO-optimized static website for an insurance comparison service.
 
 - **Modern, Responsive Design**: Mobile-first approach with beautiful gradients and animations
 - **SEO Optimized**: Complete meta tags, schema markup, sitemap, and robots.txt
-- **Multiple Landing Pages**: State-specific pages for Florida, Texas, Georgia, Michigan, California, and New York
+- **State Landing Page**: Texas-specific insurance page
 - **Service Pages**: Auto, Home, Commercial, and Life insurance pages
 - **Interactive Forms**: Quote request form with validation
 - **Fast Loading**: Pure HTML/CSS/JavaScript with no heavy frameworks
@@ -26,20 +26,15 @@ affordableinsurancequotes.net/
 ├── contact.html                  # Contact page
 ├── careers.html                  # Careers/jobs page
 ├── privacy-policy.html           # Privacy policy
-├── florida-insurance.html        # Florida landing page
 ├── texas-insurance.html          # Texas landing page
-├── georgia-insurance.html        # Georgia landing page
-├── michigan-insurance.html       # Michigan landing page
-├── california-insurance.html     # California landing page
-├── new-york-insurance.html       # New York landing page
 ├── sitemap.xml                   # XML sitemap for search engines
 ├── robots.txt                    # Robots.txt for SEO
-├── .htaccess                     # Apache config for clean URLs
 ├── css/
 │   └── styles.css                # Main stylesheet
 ├── js/
 │   └── main.js                   # JavaScript for interactivity
 ├── images/                       # Images directory (add your images here)
+├── manifest.json                 # PWA manifest (icons optional)
 └── README.md                     # This file
 ```
 
@@ -68,7 +63,8 @@ The phone number **(888) 123-4567** appears throughout the site. Search and repl
 ### Add Images
 1. Add your logo to `/images/logo.png`
 2. Add Open Graph image to `/images/og-image.jpg` (1200x630px)
-3. Add other images as needed
+3. Optional PWA icons: `/images/icon-192.png`, `/images/icon-512.png` (PNG)
+4. Add other images as needed
 
 ### Customize Colors
 Edit the CSS variables in `css/styles.css`:
@@ -252,5 +248,5 @@ For questions about the website or customization needs, contact your development
 
 **Built with ❤️ for AffordableInsuranceQuotes.net**
 
-*Last Updated: January 27, 2025*
+*Last Updated: October 29, 2025*
 
