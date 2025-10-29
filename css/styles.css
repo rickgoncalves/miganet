@@ -1503,3 +1503,22 @@ select.form-control {
     margin-bottom: 40px;
 }
 
+ 
+/* ===========================
+   Mobile Safari hairline fix
+   - mitigates thin black line artifacts during scroll on iOS
+   =========================== */
+@media (max-width: 768px) {
+    .site-header {
+        /* Avoid over-aggressive layer promotion on iOS */
+        will-change: auto;
+    }
+
+    /* Promote sections beneath the sticky header to their own layers */
+    .hero,
+    .cta-section {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+}
