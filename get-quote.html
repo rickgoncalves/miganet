@@ -74,7 +74,7 @@
                 </div>
 
                 <form class="quote-form formcarryForm" action="https://formcarry.com/s/e2mdmZ4yILs" method="post" enctype="multipart/form-data" data-sitekey="6Lfyhv8rAAAAABVYhBYxuZHfjI60MODuWsj-XPB1" novalidate>
-                    <input type="hidden" name="recaptcha_token" id="recaptchaToken" value="">
+                    <input type="hidden" name="g-recaptcha-response" id="recaptchaToken" value="">
                     <input type="hidden" name="submission_latency" value="">
                     <input type="hidden" name="form_origin" value="get-quote-page">
                     <input type="hidden" name="form_referrer" value="">
@@ -321,7 +321,7 @@
             const $form = $(this);
             const siteKey = $form.data('sitekey');
             const $responseBox = $form.find('#quoteFormResponse');
-            const $recaptchaInput = $form.find('input[name="recaptcha_token"]');
+            const $recaptchaInput = $form.find('input[name="g-recaptcha-response"]');
             const $latencyInput = $form.find('input[name="submission_latency"]');
             const $referrerInput = $form.find('input[name="form_referrer"]');
             const $honeypot = $form.find('input[name="company"]');
