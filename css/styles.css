@@ -647,6 +647,61 @@ ul {
 }
 
 /* ===========================
+   Quote Benefits Section
+   =========================== */
+.quote-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.quote-benefit-item {
+    text-align: center;
+    padding: 20px;
+}
+
+.quote-benefit-item .service-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 24px;
+    padding: 18px;
+    background: linear-gradient(135deg, #1e40af 0%, #ffffff 50%, #dc2626 100%);
+    border-radius: var(--radius-xl);
+    color: var(--primary-color);
+    box-shadow: 0 8px 24px rgba(30, 64, 175, 0.25);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quote-benefit-item:hover .service-icon {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 12px 32px rgba(30, 64, 175, 0.35);
+}
+
+.quote-benefit-item .service-icon i {
+    font-size: 36px;
+    color: var(--primary-color);
+}
+
+.quote-benefit-item h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+    letter-spacing: -0.02em;
+}
+
+.quote-benefit-item p {
+    color: var(--text-light);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ===========================
    Testimonials
    =========================== */
 .testimonials {
@@ -1377,6 +1432,11 @@ select.form-control {
         gap: 20px;
     }
     
+    .quote-benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
     .carrier-logos {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 15px;
@@ -1469,6 +1529,29 @@ select.form-control {
     .feature-item {
         font-size: 14px;
         padding: 10px 20px;
+    }
+    
+    .quote-benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    
+    .quote-benefit-item .service-icon {
+        width: 64px;
+        height: 64px;
+        padding: 14px;
+    }
+    
+    .quote-benefit-item .service-icon i {
+        font-size: 32px;
+    }
+    
+    .quote-benefit-item h3 {
+        font-size: 20px;
+    }
+    
+    .quote-benefit-item p {
+        font-size: 15px;
     }
     
     .carrier-logos {
