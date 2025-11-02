@@ -1165,6 +1165,71 @@ select.form-control {
 }
 
 /* ===========================
+   Form Validation & Error States
+   =========================== */
+.formcarry-field-error {
+    border-color: var(--error-color) !important;
+    background-color: #fef2f2 !important;
+    animation: shake 0.4s ease-in-out;
+}
+
+.formcarry-field-error:focus {
+    border-color: var(--error-color) !important;
+    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1) !important;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Error styling for checkboxes */
+input[type="checkbox"].formcarry-field-error {
+    outline: 2px solid var(--error-color);
+    outline-offset: 2px;
+}
+
+/* Error message display below fields (not for checkboxes/radios) */
+.formcarry-field-error[data-error-message]:not([type="checkbox"]):not([type="radio"])::after {
+    content: attr(data-error-message);
+    display: block;
+    color: var(--error-color);
+    font-size: 14px;
+    margin-top: 6px;
+    font-weight: 500;
+}
+
+/* Error highlighting for select dropdowns */
+select.formcarry-field-error {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath fill='%23dc2626' d='M11.293 4.293L7 8.586 2.707 4.293A1 1 0 001.293 5.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Form response box positioning */
+.form-response {
+    border-radius: var(--radius-lg);
+    font-weight: 500;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { 
+        opacity: 0; 
+        transform: translateY(-10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* ===========================
    Content Pages
    =========================== */
 .page-header {

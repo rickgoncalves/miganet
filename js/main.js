@@ -37,8 +37,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Form validation
-    const forms = document.querySelectorAll('.quote-form');
+    // Form validation (exclude formcarryForm - it has its own handler)
+    const forms = document.querySelectorAll('.quote-form:not(.formcarryForm)');
     forms.forEach(form => {
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -54,7 +54,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const requiredFields = form.querySelectorAll('[required]');
         
         requiredFields.forEach(field => {
-            if (!field.value.trim()) {
+            // Handle checkboxes and radio buttons differently
+            if (field.type === 'checkbox' || field.type === 'radio') {
+                if (!field.checked) {
+                    isValid = false;
+                    showError(field, 'This field is required');
+                } else {
+                    clearError(field);
+                }
+            } else if (!field.value.trim()) {
                 isValid = false;
                 showError(field, 'This field is required');
             } else {

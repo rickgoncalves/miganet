@@ -150,13 +150,14 @@
                             <textarea id="comments" name="comments" class="form-control" placeholder="Tell us about your insurance needs, any questions, or specific requirements..." rows="4" maxlength="1000"></textarea>
                         </div>
 
-                        <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                        <div id="consent-wrapper" style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
                             <label style="display: flex; align-items: flex-start; cursor: pointer;">
-                                <input type="checkbox" name="consent" value="yes" required style="margin-top: 4px; margin-right: 10px;">
+                                <input type="checkbox" id="consent-checkbox" name="consent" value="yes" required style="margin-top: 4px; margin-right: 10px;">
                                 <span style="font-size: 14px; color: #4b5563;">
                                     By submitting this form, I agree to receive calls, emails, and text messages from AffordableInsuranceQuotes.net and its partners regarding insurance quotes and services. I understand I can opt out at any time. *
                                 </span>
                             </label>
+                            <div id="consent-error" style="display: none; color: #dc2626; font-size: 14px; margin-top: 10px; font-weight: 600;"></div>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-large" data-default-text="Get My FREE Quote Now" data-loading-text="Submitting..." style="width: 100%; font-size: 20px; padding: 18px;">
@@ -305,7 +306,7 @@
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lfyhv8rAAAAABVYhBYxuZHfjI60MODuWsj-XPB1"></script>
     <script>
     (function($) {
         const MIN_SUBMISSION_TIME = 2000; // 2 seconds
@@ -343,6 +344,12 @@
                     .removeClass('formcarry-field-error')
                     .removeAttr('aria-invalid')
                     .removeAttr('data-error-message');
+                
+                // Clear consent error styling
+                if ($(this).attr('name') === 'consent') {
+                    $('#consent-wrapper').css('border', 'none');
+                    $('#consent-error').hide().text('');
+                }
             });
 
             $form.on('submit', function(event) {
@@ -353,6 +360,14 @@
                 const validationErrors = validateForm($form);
                 if (validationErrors.length) {
                     showMessage('Please correct the highlighted fields before submitting.', 'error');
+                    
+                    // Scroll to first error
+                    const $firstError = $form.find('.formcarry-field-error').first();
+                    if ($firstError.length) {
+                        $('html, body').animate({
+                            scrollTop: $firstError.offset().top - 100
+                        }, 300);
+                    }
                     return;
                 }
 
@@ -374,6 +389,8 @@
                 const finalizeSubmission = function() {
                     const formData = new FormData($form[0]);
 
+                    console.log('Submitting form to:', $form.attr('action'));
+
                     $.ajax({
                         type: 'POST',
                         url: $form.attr('action'),
@@ -382,28 +399,36 @@
                         processData: false,
                         contentType: false,
                         success: function(response) {
+                            console.log('Form submission success:', response);
                             handleSuccess(response);
                         },
-                        error: function(jqXHR, textStatus) {
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.error('Form submission error:', textStatus, errorThrown, jqXHR);
                             handleError(jqXHR, textStatus);
                         },
                         complete: function() {
+                            console.log('Form submission complete');
                             setSubmitting(false);
                         }
                     });
                 };
 
-                if (typeof grecaptcha !== 'undefined' && siteKey && siteKey !== '6Lfyhv8rAAAAABVYhBYxuZHfjI60MODuWsj-XPB1') {
+                // Use reCAPTCHA v3 for spam protection
+                if (typeof grecaptcha !== 'undefined' && siteKey) {
+                    console.log('Using reCAPTCHA v3 with site key:', siteKey);
                     grecaptcha.ready(function() {
                         grecaptcha.execute(siteKey, { action: 'submit' }).then(function(token) {
+                            console.log('reCAPTCHA token obtained:', token.substring(0, 20) + '...');
                             $recaptchaInput.val(token);
                             finalizeSubmission();
-                        }).catch(function() {
+                        }).catch(function(error) {
+                            console.error('reCAPTCHA error:', error);
                             setSubmitting(false);
                             showMessage('reCAPTCHA validation failed. Please reload the page and try again.', 'error');
                         });
                     });
                 } else {
+                    console.log('No reCAPTCHA, submitting directly');
                     finalizeSubmission();
                 }
             });
@@ -529,6 +554,11 @@
                 const consent = $formEl.find('[name="consent"]');
                 if (!consent.is(':checked')) {
                     addError(consent, 'Please accept the consent to proceed.');
+                    $('#consent-wrapper').css({
+                        'border': '2px solid #dc2626',
+                        'background': '#fef2f2'
+                    });
+                    $('#consent-error').text('You must agree to the terms above to submit this form.').show();
                     errors.push('consent');
                 }
 
@@ -544,10 +574,49 @@
 
             function handleSuccess(response) {
                 if (response && response.status === 'success') {
-                    showMessage('We received your submission, thank you!', 'success');
+                    // Hide the form fields
+                    $form.find('.form-fields').fadeOut(300, function() {
+                        // Show prominent success message
+                        const successHTML = `
+                            <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 50px 40px; border-radius: 16px; text-align: center; margin: 20px 0; box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);">
+                                <div style="font-size: 60px; margin-bottom: 20px;">✓</div>
+                                <h2 style="font-size: 36px; font-weight: 800; margin-bottom: 20px; color: white;">Thank You!</h2>
+                                <p style="font-size: 20px; margin-bottom: 15px; opacity: 0.95; line-height: 1.6;">Your quote request has been received. One of our licensed agents will contact you shortly at the number you provided.</p>
+                                <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.3);">
+                                    <p style="font-size: 18px; margin-bottom: 15px; font-weight: 600;">Need immediate assistance?</p>
+                                    <a href="tel:8881234567" style="display: inline-block; background: white; color: #059669; padding: 16px 40px; border-radius: 12px; font-weight: 700; font-size: 24px; text-decoration: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: transform 0.2s;">
+                                        📞 (888) 123-4567
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                        $responseBox.html(successHTML).css({
+                            display: 'block',
+                            padding: '0',
+                            borderRadius: '0',
+                            marginBottom: '0',
+                            backgroundColor: 'transparent',
+                            border: 'none'
+                        }).hide().fadeIn(400);
+                        
+                        // Scroll to success message
+                        $('html, body').animate({
+                            scrollTop: $responseBox.offset().top - 100
+                        }, 500);
+                    });
+                    
+                    // Reset form data
                     $form[0].reset();
                     $recaptchaInput.val('');
                     formStart = Date.now();
+                    
+                    // Clear consent error styling
+                    $('#consent-wrapper').css({
+                        'border': 'none',
+                        'background': '#f3f4f6'
+                    });
+                    $('#consent-error').hide().text('');
+                    
                     return;
                 }
 
