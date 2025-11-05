@@ -1,20 +1,39 @@
 {
-  "name": "AffordableInsuranceQuotes.net",
+  "name": "Affordable Insurance Quotes",
   "short_name": "AIQ",
-  "description": "Compare insurance quotes from 36+ top carriers. Save hundreds on auto, home, and commercial insurance.",
+  "description": "Compare insurance quotes from 36+ top carriers. Save on auto, home, and commercial insurance.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2563eb",
   "orientation": "portrait-primary",
   "icons": [
     {
+      "src": "/images/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/images/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    },
+    {
       "src": "/images/favicon.ico",
       "type": "image/x-icon",
       "sizes": "32x32"
     }
   ],
-  "categories": ["finance", "business"],
+  "categories": [
+    "finance",
+    "business"
+  ],
   "lang": "en-US",
   "dir": "ltr"
 }
