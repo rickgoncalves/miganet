@@ -11,7 +11,7 @@ Save hundreds on auto, home, and commercial insurance by comparing rates from 36
 
 ## Get Started
 
-- Call now: (888) 123-4567
+- Call now: 1-888-233-1008
 - Get a free quote online: `get-quote.html`
 - Explore services:
   - Auto: `auto-insurance.html`

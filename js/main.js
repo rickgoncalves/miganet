@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div style="background: #10b981; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-top: 20px;">
                 <h3 style="margin-bottom: 10px;">Thank You!</h3>
                 <p>Your quote request has been received. One of our agents will contact you shortly at the number you provided.</p>
-                <p style="margin-top: 15px; font-weight: 600;">Or call us now at (888) 123-4567 for immediate assistance!</p>
+                <p style="margin-top: 15px; font-weight: 600;">Or call us now at 1-888-233-1008 for immediate assistance!</p>
             </div>
         `;
         form.appendChild(successDiv);
