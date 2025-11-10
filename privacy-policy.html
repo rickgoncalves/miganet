@@ -15,6 +15,39 @@
       // 2. Google Ads Base Tracking (for remarketing)
       gtag('config', 'AW-17706338773');
     </script>
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-17706338773/6nNNCISNk70bENWThftB',
+          'event_callback': callback
+      });
+      return false;
+    }
+    (function() {
+      function bindTelConversionTracking() {
+        document.addEventListener('click', function (e) {
+          var anchor = e.target.closest && e.target.closest('a[href^="tel:"]');
+          if (anchor) {
+            var href = anchor.getAttribute('href');
+            var result = gtag_report_conversion(href);
+            if (result === false) {
+              e.preventDefault();
+            }
+          }
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', bindTelConversionTracking);
+      } else {
+        bindTelConversionTracking();
+      }
+    })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Privacy Policy for Affordable Insurance Quotes LLC. Learn how we collect, use, and protect your personal information.">
